@@ -51,6 +51,10 @@ to quickly create a Cobra application.`,
 		if err != nil {
 			panic(err)
 		}
+		encode, err := cmd.Flags().GetBool("encode")
+		if err != nil {
+			panic(err)
+		}
 
 		hashers, err := getHashers(algs)
 		if err != nil {
@@ -59,8 +63,12 @@ to quickly create a Cobra application.`,
 
 		for _, hasher := range hashers {
 			hasher.Write([]byte(text))
-			str := base64.StdEncoding.EncodeToString(hasher.Sum(nil))
-			fmt.Println(str)
+			if encode {
+				str := base64.StdEncoding.EncodeToString(hasher.Sum(nil))
+				fmt.Println(str)
+			} else {
+				fmt.Println(hasher.Sum(nil))
+			}
 		}
 
 	},

@@ -60,6 +60,7 @@ func init() {
 
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.hash.yaml)")
 	rootCmd.PersistentFlags().StringArrayP("algorithms", "a", []string{"sha256", "md5"}, "The hashing algorithm/s to use.")
+	rootCmd.PersistentFlags().BoolP("encode", "e", false, "Base64 encode the hashed content.")
 }
 
 // initConfig reads in config file and ENV variables if set.
