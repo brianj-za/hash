@@ -21,14 +21,11 @@
 package cmd
 
 import (
-	"crypto/md5"
-	"crypto/sha1"
-	"crypto/sha256"
 	"encoding/base64"
 	"fmt"
-	"hash"
+	"log"
 
-	"github.com/pkg/errors"
+	"bitbucket.com/brianj-za/hash/hashers"
 	"github.com/spf13/cobra"
 )
 
@@ -56,9 +53,9 @@ to quickly create a Cobra application.`,
 			panic(err)
 		}
 
-		hashers, err := getHashers(algs)
+		hashers, err := hashers.Get(algs)
 		if err != nil {
-			panic(err)
+			log.Println(err)
 		}
 
 		for _, hasher := range hashers {
@@ -86,21 +83,4 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// textCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-}
-
-func getHashers(algorithms []string) ([]hash.Hash, error) {
-	hashers := make([]hash.Hash, 0, 2)
-	for _, a := range algorithms {
-		switch a {
-		case "sha256":
-			hashers = append(hashers, sha256.New())
-		case "md5":
-			hashers = append(hashers, md5.New())
-		case "sha1":
-			hashers = append(hashers, sha1.New())
-		default:
-			return nil, errors.Errorf("unknown hasher %s", a)
-		}
-	}
-	return hashers, nil
 }
