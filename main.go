@@ -20,7 +20,7 @@
 
 package main
 
-import "bitbucket.com/brianj-za/hash/cmd"
+import "bitbucket.org/brianj-za/hash/cmd"
 
 func main() {
 	cmd.Execute()
