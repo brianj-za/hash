@@ -25,7 +25,7 @@ import (
 	"fmt"
 	"log"
 
-	"bitbucket.com/brianj-za/hash/hashers"
+	"bitbucket.org/brianj-za/hash/hashers"
 	"github.com/spf13/cobra"
 )
 
